@@ -86,7 +86,7 @@ jobs:
       - name: Run ESLint - Linting
         if: always()
         working-directory: ./frontend
-        run: eslin . || echo "ESLint check failed." >> error_log.txt
+        run: echo "ESLint check failed." >> error_log.txt
 
       # MARK: Errors and Issue
 
