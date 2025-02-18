@@ -70,10 +70,10 @@ jobs:
       # MARK: Frontend Tests
 
       - name: Install Prettier
+        working-directory: ./frontend
         run: yarn add prettier
 
       - name: Run Prettier - Formatting Check
-        working-directory: ./frontend
         run: |
           yarn prettier . --check --config ../.prettierrc --ignore-path ../.prettierignore || echo "Prettier check failed." >> error_log.txt
 
@@ -102,7 +102,7 @@ jobs:
         if: failure()
         uses: peter-evans/create-issue-from-file@v4
         with:
-          title: $(date +'%Y-%m-%d') Dependency Update Errors
+          title: $(date +%Y-%m-%d) Dependency Update Errors
           content-filepath: error_log.txt
           labels: |
             dependencies
