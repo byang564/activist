@@ -104,7 +104,11 @@ jobs:
 
       - name: Create GitHub Issue
         if: failure()
-        run: |
-          ISSUE_TITLE="Dependency Update Errors - $(date +'%Y-%m-%d')"
-          echo "TITLE=$ISSUE_TITLE" >> $GITHUB_ENV
-          cat error_log.txt | gh issue create --title "$ISSUE_TITLE" --label "dependencies, help wanted" --body -
+        uses: peter-evans/create-issue-from-file@v4
+        with:
+          title: $(date +%Y-%m-%d) Dependency Update Errors
+          content-filepath: error_log.txt
+          labels: |
+            dependencies
+            help wanted
+
