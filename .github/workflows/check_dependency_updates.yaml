@@ -74,6 +74,7 @@ jobs:
         run: yarn add prettier
 
       - name: Run Prettier - Formatting Check
+        working-directory: ./frontend
         run: |
           yarn prettier . --check --config ../.prettierrc --ignore-path ../.prettierignore || echo "Prettier check failed." >> error_log.txt
 
@@ -85,7 +86,7 @@ jobs:
       - name: Run ESLint - Linting
         if: always()
         working-directory: ./frontend
-        run: eslint . || echo "ESLint check failed." >> error_log.txt
+        run: eslin . || echo "ESLint check failed." >> error_log.txt
 
       # MARK: Errors and Issue
 
