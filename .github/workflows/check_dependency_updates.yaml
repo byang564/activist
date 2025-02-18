@@ -21,7 +21,7 @@ jobs:
 
       - name: Install Yarn
         working-directory: ./frontend
-        run: install
+        run: yarn install
 
       # MARK: Dependency Updates
 
