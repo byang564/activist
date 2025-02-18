@@ -41,7 +41,7 @@ jobs:
           python -m pip install --upgrade uv
           uv venv
           uv pip install -r requirements-dev.txt
-          pip list --outdated --format=freeze | grep -v '^\-e' | cut -d = -f 1 | xargs -n1 pip install -U
+          pip list --outdated | awk '{print $1}' | tail -n +3 | xargs -n1 pip install -U
           pip freeze > requirements-dev.txt
 
       - name: Install npm-check-updates
