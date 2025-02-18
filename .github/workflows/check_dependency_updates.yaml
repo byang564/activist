@@ -102,15 +102,9 @@ jobs:
             echo "No errors found during dependency update."
           fi
 
-      - name: Set Issue Title
-        run: echo "TITLE=Dependency Update Errors - $(date +'%Y-%m-%d')" >> $GITHUB_ENV
-
       - name: Create GitHub Issue
         if: failure()
-        uses: peter-evans/create-issue-from-file@v4
-        with:
-          title: ${{ env.Title }}
-          content-filepath: error_log.txt
-          labels: |
-            dependencies
-            help wanted
+        run: |
+          ISSUE_TITLE="Dependency Update Errors - $(date +'%Y-%m-%d')"
+          echo "TITLE=$ISSUE_TITLE" >> $GITHUB_ENV
+          cat error_log.txt | gh issue create --title "$ISSUE_TITLE" --label "dependencies, help wanted" --body -
