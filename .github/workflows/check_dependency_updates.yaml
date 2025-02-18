@@ -19,6 +19,11 @@ jobs:
         with:
           node-version: 20
 
+      - name: Enable Corepack and Install Yarn
+        run: |
+          corepack enable
+          corepack prepare yarn@4.6.0 --activate
+
       - name: Install Yarn
         working-directory: ./frontend
         run: yarn install
